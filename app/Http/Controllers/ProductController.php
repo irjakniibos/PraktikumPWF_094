@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Models\Product;
 use App\Models\User;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 
 class ProductController extends Controller
@@ -16,20 +17,10 @@ class ProductController extends Controller
         return view('product.index', compact('products'));
     }
 
-    public function store(Request $request)
+    public function store(StoreProductRequest $request)
     {
         $currentUser = $request->user();
-        $rules = [
-            'name'     => 'required|string|max:255',
-            'quantity' => 'required|integer',
-            'price'    => 'required|numeric',
-        ];
-
-        if ($currentUser->role === 'admin') {
-            $rules['user_id'] = 'required|exists:users,id';
-        }
-
-        $validated = $request->validate($rules);
+        $validated = $request->validated();
         $ownerId = $currentUser->role === 'admin'
             ? (int) $validated['user_id']
             : $currentUser->id;
@@ -61,35 +52,20 @@ class ProductController extends Controller
         return view('product.view', compact('product'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
         $product = Product::findOrFail($id);
 
         // Terapkan ProductPolicy: cek apakah user boleh update produk ini
         Gate::authorize('update', $product);
 
-        $validated = $request->validate([
-            'name'     => 'sometimes|string|max:255',
-            'quantity' => 'sometimes|integer',
-            'price'    => 'sometimes|numeric',
-            'user_id'  => 'sometimes|exists:users,id',
-        ]);
-
-        if (array_key_exists('user_id', $validated)) {
-            $targetOwner = User::findOrFail($validated['user_id']);
-            $currentUser = $request->user();
-
-            // User biasa tidak boleh memindahkan ownership ke admin.
-            if ($currentUser->role !== 'admin' && $targetOwner->role === 'admin') {
-                abort(403, 'Akses ditolak. User tidak boleh memindahkan data ke admin.');
-            }
-        }
+        $validated = $request->validated();
 
         $payload = [
-            'name' => $validated['name'] ?? $product->name,
-            'qty' => $validated['quantity'] ?? $product->qty,
-            'price' => $validated['price'] ?? $product->price,
-            'user_id' => $validated['user_id'] ?? $product->user_id,
+            'name' => $validated['name'],
+            'qty' => $validated['quantity'],
+            'price' => $validated['price'],
+            'user_id' => $validated['user_id'],
         ];
 
         $product->update($payload);
