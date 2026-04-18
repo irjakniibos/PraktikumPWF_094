@@ -104,7 +104,7 @@
                                 <button type="submit"
                                     onclick="return confirm('Are you sure you want to delete this product?');"
                                     form="delete-product-form"
-                                    class="inline-flex items-center gap-2 rounded-2xl border border-rose-400/20 bg-rose-400/10 px-4 py-3 text-sm font-semibold text-rose-200 transition hover:bg-rose-400/20">
+                                    class="inline-flex items-center gap-2 rounded-2xl border border-rose-500/70 px-5 py-3 text-sm font-semibold text-rose-400 transition hover:bg-rose-500/10">
                                     <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
                                         viewBox="0 0 24 24" stroke="currentColor">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"

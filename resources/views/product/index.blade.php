@@ -8,6 +8,9 @@
 						<p class="mt-1 text-sm text-slate-400">Manage your product inventory</p>
 					</div>
 					<div class="flex flex-wrap gap-3">
+						@can('manage-products')
+							<x-add-product :url="route('product.create')" :name="'Product'" />
+						@endcan
 						@can('export-product')
 							<a href="{{ route('product.export') }}" class="inline-flex items-center gap-2 rounded-xl border border-emerald-400 px-4 py-2.5 text-sm font-semibold text-emerald-300 hover:bg-emerald-500/10">
 								<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -16,12 +19,9 @@
 								Export
 							</a>
 						@endcan
-						<a href="{{ route('product.create') }}" class="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white hover:bg-indigo-500">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-								<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
-							</svg>
-							Add Product
-						</a>
+						@can('create', \App\Models\Product::class)
+							<x-add-product :url="route('product.create')" :name="'Product'" />
+						@endcan
 					</div>
 				</div>
 
