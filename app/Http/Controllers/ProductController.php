@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreProductRequest;
 use App\Http\Requests\UpdateProductRequest;
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
@@ -12,7 +13,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::with('user')->get();
+        $products = Product::with(['user', 'category'])->get();
 
         return view('product.index', compact('products'));
     }
@@ -29,6 +30,7 @@ class ProductController extends Controller
             'name' => $validated['name'],
             'qty' => $validated['quantity'],
             'price' => $validated['price'],
+            'category_id' => $validated['category_id'],
             'user_id' => $ownerId,
         ]);
 
@@ -41,13 +43,14 @@ class ProductController extends Controller
         $users = $currentUser->role === 'admin'
             ? User::orderBy('name')->get()
             : User::whereKey($currentUser->id)->get();
+        $categories = Category::orderBy('name')->get();
 
-        return view('product.create', compact('users'));
+        return view('product.create', compact('users', 'categories'));
     }
 
     public function show($id)
     {
-        $product = Product::findOrFail($id);
+        $product = Product::with(['user', 'category'])->findOrFail($id);
 
         return view('product.view', compact('product'));
     }
@@ -65,6 +68,7 @@ class ProductController extends Controller
             'name' => $validated['name'],
             'qty' => $validated['quantity'],
             'price' => $validated['price'],
+            'category_id' => $validated['category_id'],
             'user_id' => $validated['user_id'],
         ];
 
@@ -84,8 +88,9 @@ class ProductController extends Controller
         }
 
         $users = $usersQuery->get();
+        $categories = Category::orderBy('name')->get();
 
-        return view('product.edit', compact('product', 'users'));
+        return view('product.edit', compact('product', 'users', 'categories'));
     }
 
     public function delete($id)
@@ -110,7 +115,7 @@ class ProductController extends Controller
         // Cek Gate - hanya admin yang boleh
         Gate::authorize('export-product');
 
-        $products = Product::with('user')->get();
+        $products = Product::with(['user', 'category'])->get();
 
         // Buat konten CSV
         $csvContent = "No,Nama Produk,Jumlah,Harga,Pemilik\n";

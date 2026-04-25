@@ -11,14 +11,13 @@ class Category extends Model
 
     protected $fillable = [
         'name',
-        'product_id',
     ];
 
     /**
-     * Relasi ke Product (Many Categories belongs to one Product)
+     * Relasi ke Product (One Category has many Products)
      */
-    public function product()
+    public function products()
     {
-        return $this->belongsTo(Product::class);
+        return $this->hasMany(Product::class);
     }
 }

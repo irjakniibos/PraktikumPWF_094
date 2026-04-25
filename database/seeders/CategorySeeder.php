@@ -10,11 +10,11 @@ class CategorySeeder extends Seeder
     public function run(): void
     {
         $categories = [
-            ['name' => 'Elektronik',    'product_id' => 1],
-            ['name' => 'Aksesoris',     'product_id' => 2],
-            ['name' => 'Peripheral',    'product_id' => 3],
-            ['name' => 'Display',       'product_id' => 4],
-            ['name' => 'Audio',         'product_id' => 5],
+            ['name' => 'Elektronik'],
+            ['name' => 'Aksesoris'],
+            ['name' => 'Peripheral'],
+            ['name' => 'Display'],
+            ['name' => 'Audio'],
         ];
 
         foreach ($categories as $category) {

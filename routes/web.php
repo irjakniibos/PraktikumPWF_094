@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProfileController;
@@ -15,6 +16,18 @@ Route::get('/dashboard', function () {
 
 Route::middleware('auth')->group(function () {
     Route::get('/about', [AboutController::class, 'index'])->name('about');
+
+    Route::resource('category', CategoryController::class)->only(['index']);
+
+    Route::middleware('can:manage-category')->group(function () {
+        Route::resource('category', CategoryController::class)->only([
+            'create',
+            'store',
+            'edit',
+            'update',
+            'destroy',
+        ]);
+    });
 
     // Product Page
     Route::get('/product', [ProductController::class, 'index'])->name('product.index');

@@ -50,6 +50,7 @@
 									<th class="px-6 py-4 text-left">Name</th>
 									<th class="px-6 py-4 text-left">Quantity</th>
 									<th class="px-6 py-4 text-left">Price</th>
+									<th class="px-6 py-4 text-left">Category</th>
 									<th class="px-6 py-4 text-left">Owner</th>
 									<th class="px-6 py-4 text-center">Actions</th>
 								</tr>
@@ -68,6 +69,7 @@
 											<span class="inline-flex rounded-full px-2.5 py-0.5 text-xs font-semibold {{ $product->qty > 10 ? 'bg-emerald-500/20 text-emerald-300' : 'bg-rose-500/20 text-rose-300' }}">{{ $product->qty }}</span>
 										</td>
 										<td class="px-6 py-4 font-medium text-slate-100">Rp {{ number_format($product->price, 0, ',', '.') }}</td>
+										<td class="px-6 py-4 text-slate-300">{{ $product->category->name ?? '-' }}</td>
 										<td class="px-6 py-4 text-slate-300">{{ $product->user->name ?? '-' }}</td>
 										<td class="px-6 py-4">
 											<div class="flex items-center justify-center gap-2">
@@ -100,7 +102,7 @@
 									</tr>
 								@empty
 									<tr>
-										<td colspan="6" class="px-6 py-10 text-center text-slate-400">No products found.</td>
+										<td colspan="7" class="px-6 py-10 text-center text-slate-400">No products found.</td>
 									</tr>
 								@endforelse
 							</tbody>

@@ -21,6 +21,11 @@
                     <x-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
                         {{ __('Products') }}
                     </x-nav-link>
+                    @if(Auth::user()->role === 'admin')
+                        <x-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')">
+                            {{ __('Category') }}
+                        </x-nav-link>
+                    @endif
                 </div>
             </div>
 
@@ -93,6 +98,11 @@
             <x-responsive-nav-link :href="route('product.index')" :active="request()->routeIs('product.*')">
                 {{ __('Products') }}
             </x-responsive-nav-link>
+            @if(Auth::user()->role === 'admin')
+                <x-responsive-nav-link :href="route('category.index')" :active="request()->routeIs('category.*')">
+                    {{ __('Category') }}
+                </x-responsive-nav-link>
+            @endif
         </div>
 
         <!-- Responsive Settings Options -->

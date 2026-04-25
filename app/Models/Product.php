@@ -13,6 +13,7 @@ class Product extends Model
         'name',
         'qty',
         'price',
+        'category_id',
         'user_id',
     ];
 
@@ -25,10 +26,10 @@ class Product extends Model
     }
 
     /**
-     * Relasi ke Category (One Product has many Categories)
+     * Relasi ke Category (Many Products belongs to one Category)
      */
-    public function categories()
+    public function category()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsTo(Category::class);
     }
 }

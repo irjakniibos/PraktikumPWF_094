@@ -24,6 +24,7 @@ class StoreProductRequest extends FormRequest
     {
         $rules = [
             'name' => ['required', 'string', 'max:255'],
+            'category_id' => ['required', Rule::exists('categories', 'id')],
             'quantity' => ['required', 'integer', 'min:0'],
             'price' => ['required', 'numeric', 'min:0'],
         ];
@@ -44,6 +45,9 @@ class StoreProductRequest extends FormRequest
             'name.required' => 'Nama produk wajib diisi.',
             'name.string' => 'Nama produk harus berupa teks.',
             'name.max' => 'Nama produk tidak boleh lebih dari 255 karakter.',
+
+            'category_id.required' => 'Kategori wajib dipilih.',
+            'category_id.exists' => 'Kategori yang dipilih tidak valid.',
 
             'quantity.required' => 'Jumlah (kuantitas) produk wajib diisi.',
             'quantity.integer' => 'Jumlah produk harus berupa angka bulat (tidak boleh desimal).',

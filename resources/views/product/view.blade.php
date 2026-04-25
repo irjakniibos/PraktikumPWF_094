@@ -67,6 +67,11 @@
                             </div>
 
                             <div class="grid gap-3 px-6 py-6 sm:grid-cols-[210px_1fr] sm:items-center">
+                                <dt class="text-lg font-medium text-slate-400">Category</dt>
+                                <dd class="text-white">{{ $product->category->name ?? '-' }}</dd>
+                            </div>
+
+                            <div class="grid gap-3 px-6 py-6 sm:grid-cols-[210px_1fr] sm:items-center">
                                 <dt class="text-lg font-medium text-slate-400">Created At</dt>
                                 <dd class="text-slate-200">{{ $product->created_at->format('d M Y, H:i') }}</dd>
                             </div>

@@ -10,11 +10,11 @@ class ProductSeeder extends Seeder
     public function run(): void
     {
         $products = [
-            ['name' => 'Laptop Asus',       'qty' => 10, 'price' => 7500000.00,  'user_id' => 1],
-            ['name' => 'Mouse Logitech',    'qty' => 50, 'price' => 250000.00,   'user_id' => 2],
-            ['name' => 'Keyboard Mechanical','qty' => 25, 'price' => 650000.00,  'user_id' => 3],
-            ['name' => 'Monitor Samsung',   'qty' => 15, 'price' => 2800000.00,  'user_id' => 4],
-            ['name' => 'Headset Sony',      'qty' => 30, 'price' => 450000.00,   'user_id' => 5],
+            ['name' => 'Laptop Asus',        'qty' => 10, 'price' => 7500000.00, 'category_id' => 1, 'user_id' => 1],
+            ['name' => 'Mouse Logitech',     'qty' => 50, 'price' => 250000.00,  'category_id' => 2, 'user_id' => 2],
+            ['name' => 'Keyboard Mechanical', 'qty' => 25, 'price' => 650000.00, 'category_id' => 3, 'user_id' => 3],
+            ['name' => 'Monitor Samsung',    'qty' => 15, 'price' => 2800000.00, 'category_id' => 4, 'user_id' => 4],
+            ['name' => 'Headset Sony',       'qty' => 30, 'price' => 450000.00,  'category_id' => 5, 'user_id' => 5],
         ];
 
         foreach ($products as $product) {

@@ -30,6 +30,10 @@ class AppServiceProvider extends ServiceProvider
             return $user->role === 'admin';
         });
 
+        Gate::define('manage-category', function ($user) {
+            return $user->role === 'admin';
+        });
+
         // =========================================================
         // Policy: ProductPolicy untuk Model Product
         // =========================================================

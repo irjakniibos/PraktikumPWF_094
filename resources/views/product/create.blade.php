@@ -39,6 +39,28 @@
                             @enderror
                         </div>
 
+                        {{-- Category --}}
+                        <div class="space-y-2">
+                            <label for="category_id"
+                                class="block text-sm font-medium text-slate-200">
+                                Category <span class="text-rose-400">*</span>
+                            </label>
+                            <select id="category_id" name="category_id"
+                                class="w-full rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white outline-none transition focus:border-indigo-400/40 focus:bg-white/10 focus:ring-4 focus:ring-indigo-500/10">
+                                <option value="" style="color:#0f172a; background-color:#e2e8f0;">-- Select Category --</option>
+                                @foreach ($categories as $category)
+                                    <option value="{{ $category->id }}"
+                                        style="color:#0f172a; background-color:#f8fafc;"
+                                        {{ old('category_id') == $category->id ? 'selected' : '' }}>
+                                        {{ $category->name }}
+                                    </option>
+                                @endforeach
+                            </select>
+                            @error('category_id')
+                                <p class="mt-1.5 text-xs text-red-500">{{ $message }}</p>
+                            @enderror
+                        </div>
+
                         {{-- Quantity & Price --}}
                         <div class="grid gap-4 sm:grid-cols-2">
                             <div class="space-y-2">
