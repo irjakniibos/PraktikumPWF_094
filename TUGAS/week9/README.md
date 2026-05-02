@@ -14,8 +14,8 @@
 ### PUT Product
 ![Product API PUT](../../public/images/week9/productapiput.png)
 
-### DELETE Product
-![Product API DELETE](../../public/images/week9/productapidelete.png)
+### DELETE Category
+![Category API DELETE](../../public/images/week9/categoryapiremove.png)
 
 ## Category API
 
@@ -31,5 +31,6 @@
 ### PUT Category
 ![Category API PUT](../../public/images/week9/categoryapiputweek9.png)
 
-### DELETE Category
-![Category API DELETE](../../public/images/week9/categoryapiremove.png)
+
+### DELETE Product
+![Product API DELETE](../../public/images/week9/productapidelete.png)
